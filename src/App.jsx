@@ -22,10 +22,14 @@ export async function loader() {
 const AppContext = createContext({});
 
 function App() {
-  const currentUser = useLoaderData();
+  let currentUser = useLoaderData();
+
+  const onLogout = () => {
+    currentUser = null;
+  };
 
   return (
-    <AppContext.Provider value={{ currentUser }}>
+    <AppContext.Provider value={{ currentUser, onLogout }}>
       <>
         <NavBar />
         <div

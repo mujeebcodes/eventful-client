@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
 
 const NavBar = () => {
-  const { currentUser } = useAppContext();
+  const { currentUser, onLogout } = useAppContext();
   const navigate = useNavigate();
 
   const handleLogout = async (id) => {
@@ -18,6 +18,7 @@ const NavBar = () => {
       const response = await axios.get(`${API_BASE_URL}/users/${id}/logout`, {
         withCredentials: true,
       });
+      onLogout();
       navigate("/");
       return toast.success(response.data.message);
     } catch (error) {

@@ -52,7 +52,7 @@ const OrganizerLogin = () => {
           Submit
         </Button>
         <p>
-          Not a member?
+          Don't have an event organizer account?
           <Link to="/organizers/register" className="member-btn">
             Register
           </Link>
