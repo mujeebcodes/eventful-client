@@ -1,5 +1,5 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import App, { loader as currentUserLoader } from "../App";
+import App from "../App";
 import Homepage from "../pages/Homepage";
 import EventPage, {
   action as eventAction,
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: currentUserLoader,
+
     children: [
       { path: "", element: <Homepage />, index: true },
       {

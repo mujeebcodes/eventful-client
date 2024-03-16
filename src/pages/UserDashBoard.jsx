@@ -52,15 +52,21 @@ const UserDashBoard = () => {
       </Row>
       <Row>
         <h3>Your upcoming events</h3>
-        {enrollments.map((enrollment) => {
-          return (
-            <Enrollment
-              key={enrollment.id}
-              enrollment={enrollment}
-              handleCancelEnrollment={handleCancelEnrollment}
-            />
-          );
-        })}
+        {Array.isArray(enrollments) ? (
+          enrollments.map((enrollment) => {
+            return (
+              <Enrollment
+                key={enrollment.id}
+                enrollment={enrollment}
+                handleCancelEnrollment={handleCancelEnrollment}
+              />
+            );
+          })
+        ) : (
+          <Col>
+            <h3>{enrollments.msg}</h3>
+          </Col>
+        )}
       </Row>
     </Container>
   );
