@@ -16,6 +16,7 @@ const NavBar = () => {
         { withCredentials: true }
       );
       toast.success(response.data.message);
+      localStorage.removeItem("currentOrganizer");
       return navigate("/organizers/login");
     } catch (error) {
       console.error("Logout error:", error);

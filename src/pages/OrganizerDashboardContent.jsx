@@ -1,20 +1,35 @@
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { useOrgDashboardContext } from "./OrganizerDashboard";
 import NavBar from "../components/OrgNavBar";
 import OrganizerEvent from "../components/OrganizerEvent";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const OrganizerDashboardContent = () => {
   const { currentOrganizer } = useOrgDashboardContext();
-  useEffect(() => {
-    console.log("Current Organizer updated:", currentOrganizer);
-  }, [currentOrganizer]);
+  console.log(currentOrganizer);
+
   return (
     <Container>
       <NavBar />
-      {currentOrganizer.events.map((event) => {
-        return <OrganizerEvent key={event.id} event={event} />;
-      })}
+      <p>
+        These are all your created events. Events in 'pending' state will not be
+        public for people to enroll in until you mark them as 'scheduled'
+      </p>
+      {currentOrganizer.events.length > 0 ? (
+        currentOrganizer.events.map((event) => {
+          return <OrganizerEvent key={event.id} event={event} />;
+        })
+      ) : (
+        <Row>
+          <h3>You have no upcoming event scheduled</h3>
+          <p>
+            Create your next event{" "}
+            <Link to={`/organizers/${currentOrganizer.id}/create-event`}>
+              here
+            </Link>
+          </p>
+        </Row>
+      )}
     </Container>
   );
 };

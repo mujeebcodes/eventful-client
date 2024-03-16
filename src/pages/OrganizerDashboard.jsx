@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import API_BASE_URL from "../config/config";
@@ -7,8 +7,11 @@ import API_BASE_URL from "../config/config";
 const OrgDashboardContext = createContext({});
 
 const OrganizerDashboard = () => {
+  const navigate = useNavigate();
   const { organizerId } = useParams();
-  const [currentOrganizer, setCurrentOrganizer] = useState({});
+  const [currentOrganizer, setCurrentOrganizer] = useState(
+    JSON.parse(localStorage.getItem("currentOrganizer")) || null
+  );
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchCurrentOrganizer = async () => {
@@ -19,10 +22,12 @@ const OrganizerDashboard = () => {
         );
         const organizer = response.data;
         setCurrentOrganizer(organizer);
+        localStorage.setItem("currentOrganizer", JSON.stringify(organizer));
         setIsLoading(false);
       } catch (error) {
         console.log(error);
-        return error;
+        localStorage.removeItem("currentOrganizer");
+        return navigate("/organizers/login");
       }
     };
 

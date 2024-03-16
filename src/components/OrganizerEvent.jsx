@@ -4,7 +4,7 @@ import { Button, Card, Col, Modal, Row } from "react-bootstrap";
 import { formatDate } from "../utils/helpers";
 import API_BASE_URL from "../config/config";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const OrganizerEvent = ({ event }) => {
   const navigate = useNavigate();
@@ -40,7 +40,13 @@ const OrganizerEvent = ({ event }) => {
         </Col>
         <Col>
           <Button variant="primary" className="m-2">
-            Edit event
+            <Link
+              style={{ color: "white" }}
+              to={`/organizers/${event.organizerId}/edit-event/${event.id}`}
+            >
+              {" "}
+              Edit event
+            </Link>
           </Button>
 
           <Button variant="danger" onClick={() => setShowConfirmation(true)}>

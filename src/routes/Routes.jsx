@@ -26,6 +26,7 @@ import OrganizerHome from "../pages/OrganizerHome";
 import CreateEventPage from "../pages/CreateEventPage";
 import OrganizerAnalytics from "../pages/OrganizerAnalytics";
 import OrganizerDashboardContent from "../pages/OrganizerDashboardContent";
+import EditEventPage from "../pages/EditEventPage";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "", element: <OrganizerDashboardContent /> },
           { path: "create-event", element: <CreateEventPage /> },
+          { path: "edit-event/:eventId", element: <EditEventPage /> },
           { path: "analytics", element: <OrganizerAnalytics /> },
         ],
       },

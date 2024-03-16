@@ -24,8 +24,8 @@ const Upcoming = () => {
           {upcomingEvents ? (
             upcomingEvents.map((event) => (
               <Col key={event.id}>
-                <Link to={`/events/${event.id}`}>
-                  <Card style={{ width: "18rem", marginBottom: "20px" }}>
+                <Card style={{ width: "18rem", marginBottom: "20px" }}>
+                  <Link to={`/events/${event.id}`}>
                     <Card.Img variant="top" src={event.eventImg} />
                     <Card.Title>{event.title}</Card.Title>
                     <Row>
@@ -36,8 +36,8 @@ const Upcoming = () => {
                       <Col>When: {formatDate(event.when, 1)}</Col>
                       <Col>Venue: {event.venue}</Col>
                     </Row>
-                  </Card>
-                </Link>
+                  </Link>
+                </Card>
               </Col>
             ))
           ) : (
