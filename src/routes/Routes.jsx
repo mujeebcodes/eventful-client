@@ -5,16 +5,12 @@ import EventPage, {
   action as eventAction,
   loader as eventLoader,
 } from "../pages/EventPage";
-import UserLogin, {
-  action as userLoginAction,
-} from "../pages/UserLogin/UserLogin";
-import UserSignUp, {
-  action as userRegisterAction,
-} from "../pages/UserSignUp/UserSignUp";
-import OrganizerSignup from "../pages/OrganizerSignup/OrganizerSignup";
+import UserLogin, { action as userLoginAction } from "../pages/UserLogin";
+import UserSignUp, { action as userRegisterAction } from "../pages/UserSignUp";
+import OrganizerSignup from "../pages/OrganizerSignup";
 import OrganizerLogin, {
   action as organizerLoginAction,
-} from "../pages/OrganizersLogin/OrganizerLogin";
+} from "../pages/OrganizerLogin";
 import UserDashBoard, {
   loader as userDashboardLoader,
 } from "../pages/UserDashBoard";

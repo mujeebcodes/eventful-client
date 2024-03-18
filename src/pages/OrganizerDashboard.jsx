@@ -6,6 +6,14 @@ import API_BASE_URL from "../config/config";
 
 const OrgDashboardContext = createContext({});
 
+export const fetchCurrentOrganizer = async (organizerId) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/organizers/${organizerId}`,
+    { withCredentials: true }
+  );
+  return response.data;
+};
+
 const OrganizerDashboard = () => {
   const navigate = useNavigate();
   const { organizerId } = useParams();
@@ -13,14 +21,11 @@ const OrganizerDashboard = () => {
     JSON.parse(localStorage.getItem("currentOrganizer")) || null
   );
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const fetchCurrentOrganizer = async () => {
+    const fetchCurrentOrgInUseEffect = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/organizers/${organizerId}`,
-          { withCredentials: true }
-        );
-        const organizer = response.data;
+        const organizer = await fetchCurrentOrganizer(organizerId);
         setCurrentOrganizer(organizer);
         localStorage.setItem("currentOrganizer", JSON.stringify(organizer));
         setIsLoading(false);
@@ -30,12 +35,13 @@ const OrganizerDashboard = () => {
         return navigate("/organizers/login");
       }
     };
-
-    fetchCurrentOrganizer();
+    fetchCurrentOrgInUseEffect();
   }, [organizerId]);
 
   return (
-    <OrgDashboardContext.Provider value={{ currentOrganizer }}>
+    <OrgDashboardContext.Provider
+      value={{ currentOrganizer, setCurrentOrganizer }}
+    >
       <>{isLoading ? <p>Loading ....</p> : <Outlet />}</>
     </OrgDashboardContext.Provider>
   );

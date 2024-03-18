@@ -2,7 +2,7 @@ import axios from "axios";
 import { Form, Link, redirect } from "react-router-dom";
 import { Form as BootstrapForm, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import API_BASE_URL from "../../config/config";
+import API_BASE_URL from "../config/config";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();

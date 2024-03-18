@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
 
 const NavBar = () => {
-  const { currentUser, logoutUser } = useAppContext();
+  const { currentUser, logoutUser, setCurrentUser } = useAppContext();
   console.log(currentUser);
 
   return (

@@ -21,7 +21,6 @@ function App() {
         const { data } = await axios.get(`${API_BASE_URL}/users/current-user`, {
           withCredentials: true,
         });
-        console.log(data);
 
         setCurrentUser(data);
         localStorage.setItem("currentUser", JSON.stringify(data));
@@ -36,12 +35,12 @@ function App() {
 
   const logoutUser = async (id) => {
     try {
-      setCurrentUser(null);
-      localStorage.removeItem("currentUser");
       navigate("/");
       await axios.get(`${API_BASE_URL}/users/${id}/logout`, {
         withCredentials: true,
       });
+      setCurrentUser(null);
+      localStorage.removeItem("currentUser");
 
       toast.success("Logging out...");
     } catch (error) {
@@ -50,7 +49,7 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ currentUser, logoutUser }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, logoutUser }}>
       <>
         <NavBar />
         <div

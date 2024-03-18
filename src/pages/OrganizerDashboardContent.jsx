@@ -5,7 +5,7 @@ import OrganizerEvent from "../components/OrganizerEvent";
 import { Link } from "react-router-dom";
 
 const OrganizerDashboardContent = () => {
-  const { currentOrganizer } = useOrgDashboardContext();
+  const { currentOrganizer, setCurrentOrganizer } = useOrgDashboardContext();
   console.log(currentOrganizer);
 
   return (

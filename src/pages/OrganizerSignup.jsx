@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import API_BASE_URL from "../../config/config";
+import API_BASE_URL from "../config/config";
 
 const OrganizerSignup = () => {
   const navigate = useNavigate();

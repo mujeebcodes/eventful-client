@@ -1,13 +1,16 @@
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useOrgDashboardContext } from "./OrganizerDashboard";
+import {
+  fetchCurrentOrganizer,
+  useOrgDashboardContext,
+} from "./OrganizerDashboard";
 import API_BASE_URL from "../config/config";
 
 const EditEventPage = () => {
-  const { currentOrganizer } = useOrgDashboardContext();
+  const { currentOrganizer, setCurrentOrganizer } = useOrgDashboardContext();
   const { eventId } = useParams();
   let currentEvent = currentOrganizer.events.find(
     (event) => event.id == eventId
@@ -38,7 +41,8 @@ const EditEventPage = () => {
         },
         withCredentials: true,
       });
-
+      const organizer = await fetchCurrentOrganizer(currentOrganizer.id);
+      setCurrentOrganizer(organizer);
       navigate(`/organizers/${currentOrganizer.id}`);
       toast.success("Event modified successfully");
     } catch (error) {

@@ -3,11 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useOrgDashboardContext } from "./OrganizerDashboard";
+import {
+  fetchCurrentOrganizer,
+  useOrgDashboardContext,
+} from "./OrganizerDashboard";
 import API_BASE_URL from "../config/config";
 
 const CreateEventPage = () => {
-  const { currentOrganizer } = useOrgDashboardContext();
+  const { currentOrganizer, setCurrentOrganizer } = useOrgDashboardContext();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
@@ -20,7 +23,7 @@ const CreateEventPage = () => {
     formData.append("availableTickets", data.availableTickets);
     formData.append("eventStatus", data.eventStatus);
     formData.append("category", data.category);
-    formData.append("when", data.when);
+    formData.append("when", "2024-06-05T19:30:00Z");
 
     try {
       await axios.post(`${API_BASE_URL}/events`, formData, {
@@ -29,6 +32,8 @@ const CreateEventPage = () => {
         },
         withCredentials: true,
       });
+      const organizer = await fetchCurrentOrganizer(currentOrganizer.id);
+      setCurrentOrganizer(organizer);
       navigate(`/organizers/${currentOrganizer.id}`);
       toast.success("Event created successfully");
     } catch (error) {

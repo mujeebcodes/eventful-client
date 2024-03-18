@@ -5,8 +5,13 @@ import { formatDate } from "../utils/helpers";
 import API_BASE_URL from "../config/config";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  fetchCurrentOrganizer,
+  useOrgDashboardContext,
+} from "../pages/OrganizerDashboard";
 
 const OrganizerEvent = ({ event }) => {
+  const { currentOrganizer, setCurrentOrganizer } = useOrgDashboardContext();
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -17,6 +22,8 @@ const OrganizerEvent = ({ event }) => {
       });
       toast.success(response.data.message);
       setShowConfirmation(false);
+      const organizer = await fetchCurrentOrganizer(currentOrganizer.id);
+      setCurrentOrganizer(organizer);
       return navigate(`/organizers/${event.organizerId}`);
     } catch (error) {
       console.error("Error canceling event:", error);
