@@ -2,6 +2,7 @@ import axios from "axios";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import API_BASE_URL from "../config/config";
+import { formatDate } from "../utils/helpers";
 
 export const loader = async (enrollId) => {
   try {
@@ -18,42 +19,37 @@ export const loader = async (enrollId) => {
     return null;
   }
 };
+
 const EnrollmentPage = () => {
   const enrollment = useLoaderData();
+
   return (
     <Container className="my-4">
+      <h4 className="text-center">
+        Kindly visit the Event Organizer's office on the event date to scan this
+        QR code for event access
+      </h4>
       <Row className="justify-content-center">
-        <Col xs={12} md={8} lg={6}>
-          <div className="text-center">
-            <Image src={enrollment.QRCode} alt="QR Code" fluid />
-          </div>
-          <div className="mt-4">
-            <h3 className="mb-3">Enrollment Details</h3>
-            <Row>
-              <Col xs={6} className="font-weight-bold">
-                Event Title:
-              </Col>
-              <Col xs={6}>{enrollment.event.title}</Col>
-            </Row>
-            <Row>
-              <Col xs={6} className="font-weight-bold">
-                Enrollment Date:
-              </Col>
-              <Col xs={6}>{enrollment.enrollmentDate}</Col>
-            </Row>
-            <Row>
-              <Col xs={6} className="font-weight-bold">
-                User:
-              </Col>
-              <Col
-                xs={6}
-              >{`${enrollment.user.firstname} ${enrollment.user.lastname}`}</Col>
-            </Row>
-            {/* Add more details as needed */}
-          </div>
+        <Col xs={12} md={6} className="text-center">
+          <Image src={enrollment.QRCode} alt="QR Code" fluid />
+        </Col>
+        <Col xs={12} md={6} className="mt-4">
+          <h3 className="mb-3">Enrollment Details</h3>
+          <p>
+            <strong>Event Title:</strong> {enrollment.event.title}
+          </p>
+          <p>
+            <strong>Enrollment Date:</strong>{" "}
+            {formatDate(enrollment.enrollmentDate)}
+          </p>
+          <p>
+            <strong>User:</strong>{" "}
+            {`${enrollment.user.firstname} ${enrollment.user.lastname}`}
+          </p>
         </Col>
       </Row>
     </Container>
   );
 };
+
 export default EnrollmentPage;

@@ -5,7 +5,7 @@ import EventPage, {
   action as eventAction,
   loader as eventLoader,
 } from "../pages/EventPage";
-import UserLogin, { action as userLoginAction } from "../pages/UserLogin";
+import UserLogin from "../pages/UserLogin";
 import UserSignUp, { action as userRegisterAction } from "../pages/UserSignUp";
 import OrganizerSignup from "../pages/OrganizerSignup";
 import OrganizerLogin, {
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         element: <UserSignUp />,
         action: userRegisterAction,
       },
-      { path: "users/login", element: <UserLogin />, action: userLoginAction },
+      { path: "users/login", element: <UserLogin /> },
       {
         path: "users/:userId/dashboard",
         element: <UserDashBoard />,

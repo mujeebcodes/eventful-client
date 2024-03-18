@@ -7,6 +7,13 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import API_BASE_URL from "./config/config";
 import { toast } from "react-toastify";
 
+export const getCurrentUser = async () => {
+  const { data } = await axios.get(`${API_BASE_URL}/users/current-user`, {
+    withCredentials: true,
+  });
+  return data;
+};
+
 const AppContext = createContext({});
 
 function App() {
@@ -16,21 +23,18 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getCurrentUser = async () => {
+    const getCurrentUserInEffect = async () => {
       try {
-        const { data } = await axios.get(`${API_BASE_URL}/users/current-user`, {
-          withCredentials: true,
-        });
-
-        setCurrentUser(data);
-        localStorage.setItem("currentUser", JSON.stringify(data));
+        const currentUser = await getCurrentUser();
+        setCurrentUser(currentUser);
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
       } catch (error) {
         console.log(error);
         setCurrentUser(null);
         localStorage.removeItem("currentUser");
       }
     };
-    getCurrentUser();
+    getCurrentUserInEffect();
   }, []);
 
   const logoutUser = async (id) => {
