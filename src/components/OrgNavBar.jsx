@@ -24,7 +24,7 @@ const NavBar = () => {
     }
   };
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" fixed="top" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand>
           <Link to={`/organizers/${currentOrganizer.id}`}>Home</Link>
