@@ -23,9 +23,8 @@ export const getCurrentUser = async () => {
 const AppContext = createContext({});
 
 function App() {
-  const [upcomingEvents, setUpcomingEvents] = useState(
-    JSON.parse(localStorage.getItem("upcoming")) || []
-  );
+  const loadedEvents = useLoaderData();
+  const [upcomingEvents, setUpcomingEvents] = useState(loadedEvents || []);
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
