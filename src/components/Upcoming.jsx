@@ -4,18 +4,22 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import API_BASE_URL from "../config/config";
+import { useAppContext } from "../App";
 
 const Upcoming = () => {
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  useEffect(() => {
-    const fetchUpcoming = async () => {
-      const response = await axios.get(`${API_BASE_URL}/events`);
-      const upcomingEvents = response.data;
-      console.log(upcomingEvents);
-      setUpcomingEvents(upcomingEvents);
-    };
-    fetchUpcoming();
-  }, []);
+  const { upcomingEvents } = useAppContext();
+  // const [upcomingEvents, setUpcomingEvents] = useState(
+  //   JSON.parse(localStorage.getItem("upcoming")) || []
+  // );
+  // useEffect(() => {
+  //   const fetchUpcoming = async () => {
+  //     const response = await axios.get(`${API_BASE_URL}/events`);
+  //     const upcomingEvents = response.data;
+  //     console.log(upcomingEvents);
+  //     localStorage.setItem("upcoming", JSON.stringify(upcomingEvents));
+  //   };
+  //   fetchUpcoming();
+  // }, []);
   return (
     <Container style={{ maxWidth: "70%" }}>
       <h3>Upcoming Events</h3>

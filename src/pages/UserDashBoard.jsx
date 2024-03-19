@@ -23,6 +23,7 @@ export const loader = async () => {
 
 const UserDashBoard = () => {
   const { currentUser } = useAppContext();
+  console.log(currentUser);
   const enrollments = useLoaderData();
   const navigate = useNavigate();
 

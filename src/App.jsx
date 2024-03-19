@@ -7,6 +7,12 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import API_BASE_URL from "./config/config";
 import { toast } from "react-toastify";
 
+export const loader = async () => {
+  const response = await axios.get(`${API_BASE_URL}/events`);
+  localStorage.setItem("upcoming", JSON.stringify(response.data));
+  return response.data;
+};
+
 export const getCurrentUser = async () => {
   const { data } = await axios.get(`${API_BASE_URL}/users/current-user`, {
     withCredentials: true,
@@ -17,6 +23,9 @@ export const getCurrentUser = async () => {
 const AppContext = createContext({});
 
 function App() {
+  const [upcomingEvents, setUpcomingEvents] = useState(
+    JSON.parse(localStorage.getItem("upcoming")) || []
+  );
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
@@ -53,7 +62,9 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, logoutUser }}>
+    <AppContext.Provider
+      value={{ currentUser, setCurrentUser, logoutUser, upcomingEvents }}
+    >
       <>
         <NavBar />
         <div

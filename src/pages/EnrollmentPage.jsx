@@ -39,6 +39,20 @@ const EnrollmentPage = () => {
             <strong>Event Title:</strong> {enrollment.event.title}
           </p>
           <p>
+            <strong>Event Description:</strong> {enrollment.event.description}
+          </p>
+          <p>
+            <strong>Event Venue:</strong> {enrollment.event.venue}
+          </p>
+          <p>
+            <strong>Event Date:</strong> {formatDate(enrollment.event.when, 1)}
+          </p>
+
+          <p>
+            <strong>Organizer:</strong>{" "}
+            {enrollment.event.organizer.organizationName}
+          </p>
+          <p>
             <strong>Enrollment Date:</strong>{" "}
             {formatDate(enrollment.enrollmentDate)}
           </p>
@@ -46,6 +60,12 @@ const EnrollmentPage = () => {
             <strong>User:</strong>{" "}
             {`${enrollment.user.firstname} ${enrollment.user.lastname}`}
           </p>
+        </Col>
+      </Row>
+      <Row className="justify-content-center mt-4">
+        <Col xs={12} className="text-center">
+          <h3>Event Flyer</h3>
+          <Image src={enrollment.event.eventImg} alt="Event Image" fluid />
         </Col>
       </Row>
     </Container>

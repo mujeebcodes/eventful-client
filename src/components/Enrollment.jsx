@@ -1,40 +1,46 @@
-import { Card, Row, Col, Button, Modal } from "react-bootstrap";
+import { Card, Row, Col, Button, Modal, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import { useState } from "react";
 
 const Enrollment = ({ enrollment, handleCancelEnrollment }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
+
   const onCancelEnrollment = async (enrollmentId) => {
     handleCancelEnrollment(enrollmentId);
   };
+
   return (
-    <>
-      <Card key={enrollment.id}>
+    <Card key={enrollment.id} className="mb-3">
+      <Card.Body>
         <Row>
-          <Card.Title>{enrollment.event.title}</Card.Title>
-        </Row>
-        <Row>
-          <Col>Date: {formatDate(enrollment.event.when)}</Col>
-          <Col>Venue: {enrollment.event.venue}</Col>
-        </Row>
-        <Row>
-          <Col>Category: {enrollment.event.category}</Col>
-          <Col>Enrollment date: {formatDate(enrollment.enrollmentDate)}</Col>
-        </Row>
-        <Row>
-          <Col>
-            <Link to={`/users/enrollments/${enrollment.id}`}>
-              <Button>More details</Button>
-            </Link>
+          <Col sm={4}>
+            <div className="image-container">
+              <Image src={enrollment.event.eventImg} thumbnail />
+            </div>
           </Col>
-          <Col>
-            <Button onClick={() => setShowConfirmation(true)}>
-              Cancel enrollment
-            </Button>
+          <Col sm={8}>
+            <Card.Title>{enrollment.event.title}</Card.Title>
+            <Card.Text>
+              Event Date: {formatDate(enrollment.event.when)}
+            </Card.Text>
+            <Card.Text>Venue: {enrollment.event.venue}</Card.Text>
+            <Card.Text>Category: {enrollment.event.category}</Card.Text>
+            <Card.Text>
+              Enrollment date: {formatDate(enrollment.enrollmentDate)}
+            </Card.Text>
           </Col>
         </Row>
-      </Card>
+      </Card.Body>
+
+      <Card.Footer className="d-flex justify-content-between">
+        <Link to={`/users/enrollments/${enrollment.id}`}>
+          <Button variant="primary">More details</Button>
+        </Link>
+        <Button onClick={() => setShowConfirmation(true)} variant="danger">
+          Cancel enrollment
+        </Button>
+      </Card.Footer>
 
       <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)}>
         <Modal.Header closeButton>
@@ -58,7 +64,8 @@ const Enrollment = ({ enrollment, handleCancelEnrollment }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </Card>
   );
 };
+
 export default Enrollment;
