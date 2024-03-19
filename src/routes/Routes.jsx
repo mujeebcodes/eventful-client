@@ -1,5 +1,5 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import App from "../App";
+import App, { loader as appLoader } from "../App";
 import Homepage from "../pages/Homepage";
 import EventPage, {
   action as eventAction,
@@ -28,6 +28,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: appLoader,
 
     children: [
       { path: "", element: <Homepage />, index: true },
