@@ -54,7 +54,7 @@ const EnrollmentPage = () => {
           </p>
           <p>
             <strong>Enrollment Date:</strong>{" "}
-            {formatDate(enrollment.enrollmentDate)}
+            {formatDate(enrollment.enrollmentDate, 1)}
           </p>
           <p>
             <strong>User:</strong>{" "}
