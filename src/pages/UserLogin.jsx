@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Form as BootstrapForm, Button } from "react-bootstrap";
 import API_BASE_URL from "../config/config";
 import { useForm } from "react-hook-form";
+import { getCurrentUser, useAppContext } from "../App";
 
 // export const action = async ({ request }) => {
 //   const formData = await request.formData();
@@ -21,6 +22,7 @@ import { useForm } from "react-hook-form";
 // };
 
 const UserLogin = () => {
+  const { setCurrentUser } = useAppContext();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
@@ -34,6 +36,8 @@ const UserLogin = () => {
       await axios.post(`${API_BASE_URL}/users/login`, data, {
         withCredentials: true,
       });
+      const currentUser = await getCurrentUser();
+      setCurrentUser(currentUser);
       toast.success("Logged in successfully");
       return navigate("/");
     } catch (error) {
