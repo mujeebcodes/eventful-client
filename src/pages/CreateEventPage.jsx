@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -114,12 +114,6 @@ const CreateEventPage = () => {
         <Button variant="primary" type="submit">
           Create Event
         </Button>
-        <p>
-          Already registered?
-          <Link to="/organizers/login" className="member-btn">
-            Login
-          </Link>
-        </p>
       </form>
     </>
   );

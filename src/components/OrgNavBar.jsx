@@ -1,5 +1,5 @@
 import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useOrgDashboardContext } from "../pages/OrganizerDashboard";
 import axios from "axios";
 import API_BASE_URL from "../config/config";

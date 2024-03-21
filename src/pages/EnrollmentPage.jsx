@@ -6,13 +6,13 @@ import { formatDate } from "../utils/helpers";
 
 export const loader = async (enrollId) => {
   try {
-    console.log(enrollId);
+   
     const response = await axios.get(
       `${API_BASE_URL}/users/enrollments/${enrollId}`,
       { withCredentials: true }
     );
     const enrollment = response.data;
-    console.log(enrollment);
+
     return enrollment;
   } catch (error) {
     console.log(error);

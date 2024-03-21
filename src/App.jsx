@@ -24,7 +24,7 @@ const AppContext = createContext({});
 
 function App() {
   const loadedEvents = useLoaderData();
-  const [upcomingEvents, setUpcomingEvents] = useState(loadedEvents || []);
+  const [upcomingEvents] = useState(loadedEvents || []);
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );

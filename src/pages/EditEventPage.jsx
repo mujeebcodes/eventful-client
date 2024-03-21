@@ -125,7 +125,7 @@ const EditEventPage = () => {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Edit Event
+          Confirm changes
         </Button>
       </form>
     </>

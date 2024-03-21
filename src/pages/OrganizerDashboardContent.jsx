@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const OrganizerDashboardContent = () => {
   const { currentOrganizer, setCurrentOrganizer } = useOrgDashboardContext();
-  console.log(currentOrganizer);
 
   return (
     <Container>

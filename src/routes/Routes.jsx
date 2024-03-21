@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App, { loader as appLoader } from "../App";
 import Homepage from "../pages/Homepage";
 import EventPage, {

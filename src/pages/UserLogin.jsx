@@ -1,25 +1,12 @@
 import axios from "axios";
-import { Form, Link, redirect, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Form as BootstrapForm, Button } from "react-bootstrap";
 import API_BASE_URL from "../config/config";
 import { useForm } from "react-hook-form";
 import { getCurrentUser, useAppContext } from "../App";
 
-// export const action = async ({ request }) => {
-//   const formData = await request.formData();
-//   const data = Object.fromEntries(formData);
-//   try {
-//     await axios.post(`${API_BASE_URL}/users/login`, data, {
-//       withCredentials: true,
-//     });
-//     toast.success("Logged in successfully");
-//     return redirect("/");
-//   } catch (error) {
-//     console.log(error);
-//     return toast.error(error?.response?.data?.message);
-//   }
-// };
+
 
 const UserLogin = () => {
   const { setCurrentUser } = useAppContext();
@@ -27,7 +14,7 @@ const UserLogin = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+ 
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);

@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../App";
 
 const NavBar = () => {
-  const { currentUser, logoutUser, setCurrentUser } = useAppContext();
-  console.log(currentUser);
+  const { currentUser, logoutUser } = useAppContext();
 
   return (
     <Navbar expand="lg" fixed="top" className="bg-body-tertiary">
